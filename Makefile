@@ -10,7 +10,7 @@ help:
 
 all: default
 
-default: clean dev_deps deps test lint build
+default: clean dev_deps deps test coverage lint build 
 
 .venv:
 	if [ ! -e ".venv/bin/activate_this.py" ] ; then virtualenv --clear .venv ; fi
