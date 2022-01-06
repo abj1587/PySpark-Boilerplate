@@ -41,10 +41,14 @@ lint:
 	. .venv/bin/activate && pylint -r n src/main.py src/shared src/jobs tests
 
 test:
-	. .venv/bin/activate && nosetests ./tests/* --config=.noserc
+	. .venv/bin/activate && coverage run -m nose ./tests/*
 
 build: clean
 	mkdir ./dist
 	cp ./src/main.py ./dist
 	cd ./src && zip -x main.py -x \*libs\* -r ../dist/jobs.zip .
 	cd ./src/libs && zip -r ../../dist/libs.zip .
+
+coverage: test
+	coverage html --omit=src/libs/*
+	coverage report --omit=src/libs/*
